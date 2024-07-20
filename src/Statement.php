@@ -32,8 +32,8 @@ class Statement
 		$transactions = new TransactionCollection;
 
 		foreach ($this->getLines()->sortByLine() as $line) {
-			if ($line->getPrefix() == "075") {
-				$transaction = new Transaction;
+			if ($line->getIsExchangeLine()) {
+				$transaction = new Transaction($this);
 				$transactions[] = $transaction;
 			}
 			if (!$line->getIsHeaderLine()) {

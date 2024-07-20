@@ -4,17 +4,38 @@ namespace GPC;
 
 class LineCollection extends \ArrayObject
 {
-	public function filterByPrefix(string $prefix): LineCollection
-	{
-		return new static(array_values(array_filter($this->getArrayCopy(), function (Line $line) use ($prefix) {
-			return $line->getPrefix() == $prefix;
-		})));
-	}
-
 	public function filterHeaderLines(): LineCollection
 	{
 		return new static(array_values(array_filter($this->getArrayCopy(), function (Line $line) {
 			return $line->getIsHeaderLine();
+		})));
+	}
+
+	public function filterExchangeLines(): LineCollection
+	{
+		return new static(array_values(array_filter($this->getArrayCopy(), function (Line $line) {
+			return $line->getIsExchangeLine();
+		})));
+	}
+
+	public function filterDetailLines(): LineCollection
+	{
+		return new static(array_values(array_filter($this->getArrayCopy(), function (Line $line) {
+			return $line->getIsDetailLine();
+		})));
+	}
+
+	public function filterMessage1Lines(): LineCollection
+	{
+		return new static(array_values(array_filter($this->getArrayCopy(), function (Line $line) {
+			return $line->getIsMessage1();
+		})));
+	}
+
+	public function filterMessage2Lines(): LineCollection
+	{
+		return new static(array_values(array_filter($this->getArrayCopy(), function (Line $line) {
+			return $line->getIsMessage2();
 		})));
 	}
 

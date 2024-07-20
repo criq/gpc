@@ -46,4 +46,24 @@ class Line
 	{
 		return $this->getPrefix() == "074";
 	}
+
+	public function getIsExchangeLine(): bool
+	{
+		return $this->getPrefix() == "075";
+	}
+
+	public function getIsDetailLine(): bool
+	{
+		return $this->getPrefix() == "076";
+	}
+
+	public function getIsMessage1(): bool
+	{
+		return $this->getPrefix() == "078";
+	}
+
+	public function getIsMessage2(): bool
+	{
+		return $this->getPrefix() == "079";
+	}
 }
