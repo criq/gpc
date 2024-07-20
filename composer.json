@@ -1,0 +1,13 @@
+{
+	"name": "criq/gpc",
+	"description": "gpc parser",
+	"type": "library",
+	"autoload": {
+		"psr-4": {
+			"GPC\\": "src/"
+		}
+	},
+	"require": {
+		"criq/katu": "^4"
+	}
+}
