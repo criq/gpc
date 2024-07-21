@@ -5,6 +5,13 @@ namespace GPC;
 class Exchange extends LineContainer
 {
 	// Číslo účtu včetně předčíslí – doplněno vodicími nulami na 16 pozic
+
+	// https://www.alis.cz/uploads/dokumentace/keo4/ucetnictvi/banky.html
+	// Vnitřní formát čísla účtu je vytvářen permutací dle následujícího principu:
+	// Px-předčíslí, pozice x.
+	// Cx-Číslo učtu, pozice x.
+	// Číslo účtu: P1P2P3P4P5P6C1C2C3C4C5C6C7C8C9C0
+	// Vnitřní formát: C0C8C9C6C1C2C3C4C5C7P1P2P3P4P5P6
 	public function getCreditorAccountId(): string
 	{
 		return mb_substr($this->getString(), 3, 16);
