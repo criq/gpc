@@ -6,6 +6,11 @@ class Statement
 {
 	protected $lines;
 
+	public function getFlavor(): Flavor
+	{
+		return $this->getHeader()->getFlavor();
+	}
+
 	public function addLine(Line $line): Statement
 	{
 		$this->getLines()[] = $line;

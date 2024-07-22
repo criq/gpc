@@ -25,4 +25,21 @@ class CurrencyCollection extends \ArrayObject
 			}))));
 		});
 	}
+
+	public function filterById(int $id)
+	{
+		return new static(array_values(array_filter($this->getArrayCopy(), function (Currency $currency) use ($id) {
+			return $currency->getId() == $id;
+		})));
+	}
+
+	public function getById(int $id): ?Currency
+	{
+		return $this->filterById($id)->getFirst();
+	}
+
+	public function getFirst(): ?Currency
+	{
+		return array_values($this->getArrayCopy())[0] ?? null;
+	}
 }

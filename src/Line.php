@@ -4,13 +4,27 @@ namespace GPC;
 
 class Line
 {
-	protected $string;
+	protected $flavor;
 	protected $line;
+	protected $string;
 
-	public function __construct(int $line, string $string)
+	public function __construct(Flavor $flavor, int $line, string $string)
 	{
+		$this->setFlavor($flavor);
 		$this->setLine($line);
 		$this->setString($string);
+	}
+
+	public function setFlavor(Flavor $flavor): Line
+	{
+		$this->flavor = $flavor;
+
+		return $this;
+	}
+
+	public function getFlavor(): Flavor
+	{
+		return $this->flavor;
 	}
 
 	public function setLine(int $line): Line

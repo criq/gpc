@@ -2,6 +2,8 @@
 
 namespace GPC;
 
+use Katu\Tools\Calendar\Time;
+
 class Transaction
 {
 	protected $statement;
@@ -10,6 +12,11 @@ class Transaction
 	public function __construct(Statement $statement)
 	{
 		$this->setStatement($statement);
+	}
+
+	public function getFlavor(): Flavor
+	{
+		return $this->getStatement()->getFlavor();
 	}
 
 	public function setStatement(Statement $statement): Transaction
@@ -63,5 +70,43 @@ class Transaction
 	public function getMessage2(): Message2
 	{
 		return new Message2($this->getLines()->filterMessage2Lines()->getFirst());
+	}
+
+	public function getDate(): Time
+	{
+		return \Katu\Tools\Calendar\Day::createFromFormat("dmy", $this->getExchange()->getDate())->setTime(0, 0, 0, 0);
+	}
+
+	public function getDebtorAccount(): Account
+	{
+		return new Account($this->getFlavor()->getDecodedAccountId($this->getExchange()->getDebtorAccountId()), $this->getExchange()->getBankId());
+	}
+
+	public function getDebtorName(): string
+	{
+		return trim($this->getExchange()->getDebtorName());
+	}
+
+	public function getQuantity(): Quantity
+	{
+		return new Quantity(
+			$this->getExchange()->getAmount() * .01 * $this->getExchange()->getAccountingMultiplier(),
+			CurrencyCollection::createDefault()->getById($this->getFlavor()->getDecodedCurrencyId($this->getExchange()->getCurrencyId()))
+		);
+	}
+
+	public function getVariableSymbol(): string
+	{
+		return $this->getExchange()->getVariableSymbol();
+	}
+
+	public function getConstantSymbol(): string
+	{
+		return $this->getExchange()->getConstantSymbol();
+	}
+
+	public function getSpecificSymbol(): string
+	{
+		return $this->getExchange()->getSpecificSymbol();
 	}
 }

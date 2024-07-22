@@ -27,4 +27,9 @@ abstract class LineContainer
 	{
 		return $this->getLine() ? $this->getLine()->getString() : null;
 	}
+
+	public function getFlavor(): Flavor
+	{
+		return $this->getLine()->getFlavor();
+	}
 }

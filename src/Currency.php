@@ -20,10 +20,20 @@ class Currency
 		return $this;
 	}
 
+	public function getId(): int
+	{
+		return $this->id;
+	}
+
 	public function setCode(string $code): Currency
 	{
 		$this->code = $code;
 
 		return $this;
+	}
+
+	public function getCode(): string
+	{
+		return $this->code;
 	}
 }

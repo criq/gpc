@@ -4,8 +4,8 @@ namespace GPC;
 
 class Parser
 {
-	public function createFileParse(\Katu\Files\File $file): FileParse
+	public function createFileParse(Flavor $flavor, \Katu\Files\File $file): FileParse
 	{
-		return new FileParse($file);
+		return new FileParse($flavor, $file);
 	}
 }
