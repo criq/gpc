@@ -20,6 +20,11 @@ class Transaction
 		$this->setStatement($statement);
 	}
 
+	public function getLine(): int
+	{
+		return $this->getLines()->getFirst()->getLine();
+	}
+
 	public function getFlavor(): Flavor
 	{
 		return $this->getStatement()->getFlavor();
