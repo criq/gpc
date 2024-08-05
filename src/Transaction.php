@@ -7,6 +7,7 @@ use Pankki\Account;
 use Pankki\AccountNumber;
 use Pankki\BankCode;
 use Pankki\CurrencyCollection;
+use Pankki\VariableSymbol;
 use Pankki\Worth;
 
 class Transaction
@@ -113,14 +114,9 @@ class Transaction
 		);
 	}
 
-	public function getVariableSymbol(): string
+	public function getVariableSymbol(): VariableSymbol
 	{
-		return $this->getExchange()->getVariableSymbol();
-	}
-
-	public function getFormattedVariableSymbol(): ?string
-	{
-		return (int)$this->getVariableSymbol() ?: null;
+		return new VariableSymbol($this->getExchange()->getVariableSymbol());
 	}
 
 	public function getConstantSymbol(): string
