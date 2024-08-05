@@ -85,12 +85,12 @@ class Transaction
 
 	public function getDate(): ?Time
 	{
-		$time = \Katu\Tools\Calendar\Day::createFromFormat("dmy", $this->getExchange()->getDate()) ?: null;
-		if ($time) {
+		if ($this->getExchange()->getDate()) {
+			$time = Time::createFromFormat("dmy", $this->getExchange()->getDate());
 			$time->setTime(0, 0, 0, 0);
 		}
 
-		return $time;
+		return ($time ?? null);
 	}
 
 	public function getDebtorAccount(): Account
