@@ -6,7 +6,7 @@ abstract class Flavor
 {
 	abstract public function getTitle(): string;
 
-	public function getDecodedAccountId(string $accountId): string
+	public function getDecodedAccountNumber(string $accountId): string
 	{
 		return $accountId;
 	}

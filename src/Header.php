@@ -5,7 +5,7 @@ namespace GPC;
 class Header extends LineContainer
 {
 	// Číslo účtu včetně předčíslí – doplněno vodicími nulami na 16 pozic
-	public function getAccountId(): string
+	public function getAccountNumber(): string
 	{
 		return mb_substr($this->getString(), 3, 16);
 	}

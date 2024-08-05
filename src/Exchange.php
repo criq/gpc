@@ -5,7 +5,7 @@ namespace GPC;
 class Exchange extends LineContainer
 {
 	// Číslo účtu včetně předčíslí – doplněno vodicími nulami na 16 pozic
-	public function getCreditorAccountId(): string
+	public function getCreditorAccountNumber(): string
 	{
 		return mb_substr($this->getString(), 3, 16);
 	}
@@ -13,7 +13,7 @@ class Exchange extends LineContainer
 	// Číslo účtu protistrany – doplněno vodicími nulami na 16 pozic.
 	// V případě zahraničních (cizoměnových) transakcí je číslo účtu protistrany uvedeno
 	// ve větě „zpráva pro příjemce“, v tomto poli jsou uvedeny nuly
-	public function getDebtorAccountId(): string
+	public function getDebtorAccountNumber(): string
 	{
 		return mb_substr($this->getString(), 19, 16);
 	}
@@ -66,7 +66,7 @@ class Exchange extends LineContainer
 	// Kód banky protistrany (např. 0300)
 	// V případě zahraničních (cizoměnových) transakcí vyplněno nulami, SWIFT kód banky
 	// je uveden ve větě „zpráva pro příjemce“
-	public function getBankId(): string
+	public function getBankCode(): string
 	{
 		return mb_substr($this->getString(), 73, 4);
 	}

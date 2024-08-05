@@ -22,7 +22,7 @@ class CSAS extends General
 	// Číslo účtu: P1P2P3P4P5P6C1C2C3C4C5C6C7C8C9C0
 	// P1 P2 P3 P4 P5 P6 C1 C2 C3 C4 C5 C6 C7 C8 C9 C0
 	// 10 11 12 13 14 15  4  5  6  7  8  3  9  1  2  0
-	public function getDecodedAccountId(string $accountId): string
+	public function getDecodedAccountNumber(string $accountId): string
 	{
 		return implode([
 			$accountId[10],

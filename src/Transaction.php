@@ -96,8 +96,8 @@ class Transaction
 	public function getDebtorAccount(): Account
 	{
 		return new Account(
-			new AccountNumber($this->getFlavor()->getDecodedAccountId($this->getExchange()->getDebtorAccountId())),
-			new BankCode($this->getExchange()->getBankId()),
+			new AccountNumber($this->getFlavor()->getDecodedAccountNumber($this->getExchange()->getDebtorAccountNumber())),
+			new BankCode($this->getExchange()->getBankCode()),
 		);
 	}
 
@@ -108,7 +108,7 @@ class Transaction
 
 	public function getCreditorAccountNumber(): AccountNumber
 	{
-		return new AccountNumber($this->getFlavor()->getDecodedAccountId($this->getExchange()->getCreditorAccountId()));
+		return new AccountNumber($this->getFlavor()->getDecodedAccountNumber($this->getExchange()->getCreditorAccountNumber()));
 	}
 
 	public function getWorth(): Worth
