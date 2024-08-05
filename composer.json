@@ -8,6 +8,8 @@
 		}
 	},
 	"require": {
-		"criq/katu": "^4"
+		"criq/katu": "^4",
+		"criq/pankki": "dev-master",
+		"globalcitizen/php-iban": "@stable"
 	}
 }

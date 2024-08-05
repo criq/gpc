@@ -3,6 +3,11 @@
 namespace GPC;
 
 use Katu\Tools\Calendar\Time;
+use Pankki\Account;
+use Pankki\AccountNumber;
+use Pankki\BankCode;
+use Pankki\CurrencyCollection;
+use Pankki\Worth;
 
 class Transaction
 {
@@ -84,7 +89,10 @@ class Transaction
 
 	public function getDebtorAccount(): Account
 	{
-		return new Account($this->getFlavor()->getDecodedAccountId($this->getExchange()->getDebtorAccountId()), $this->getExchange()->getBankId());
+		return new Account(
+			new AccountNumber($this->getFlavor()->getDecodedAccountId($this->getExchange()->getDebtorAccountId())),
+			new BankCode($this->getExchange()->getBankId()),
+		);
 	}
 
 	public function getDebtorName(): string
@@ -92,14 +100,14 @@ class Transaction
 		return trim($this->getExchange()->getDebtorName());
 	}
 
-	public function getCreditorAccount(): Account
+	public function getCreditorAccountNumber(): AccountNumber
 	{
-		return new Account($this->getFlavor()->getDecodedAccountId($this->getExchange()->getCreditorAccountId()));
+		return new AccountNumber($this->getFlavor()->getDecodedAccountId($this->getExchange()->getCreditorAccountId()));
 	}
 
-	public function getAmount(): Amount
+	public function getWorth(): Worth
 	{
-		return new Amount(
+		return new Worth(
 			$this->getExchange()->getAmount() * .01 * $this->getExchange()->getAccountingMultiplier(),
 			CurrencyCollection::createDefault()->getById($this->getFlavor()->getDecodedCurrencyId($this->getExchange()->getCurrencyId()))
 		);
