@@ -4,6 +4,11 @@ namespace GPC\Flavors;
 
 class CSAS extends General
 {
+	public function getTitle(): string
+	{
+		return "Česká spořitelna";
+	}
+
 	// https://www.alis.cz/uploads/dokumentace/keo4/ucetnictvi/banky.html
 	// https://www.csas.cz/static_internet/cs/Obchodni_informace-Produkty/Prime_bankovnictvi/Spolecne/Prilohy/ABO_format.pdf
 	// Vnitřní formát čísla účtu je vytvářen permutací dle následujícího principu:

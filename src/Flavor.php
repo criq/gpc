@@ -4,6 +4,8 @@ namespace GPC;
 
 abstract class Flavor
 {
+	abstract public function getTitle(): string;
+
 	public function getDecodedAccountId(string $accountId): string
 	{
 		return $accountId;

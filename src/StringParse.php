@@ -45,4 +45,9 @@ class StringParse
 			return new Line($this->getFlavor(), $index + 1, $string);
 		}, $array, array_keys($array)));
 	}
+
+	public function getStatements(): StatementCollection
+	{
+		return $this->getLines()->getStatements();
+	}
 }

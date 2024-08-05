@@ -72,9 +72,14 @@ class Transaction
 		return new Message2($this->getLines()->filterMessage2Lines()->getFirst());
 	}
 
-	public function getDate(): Time
+	public function getDate(): ?Time
 	{
-		return \Katu\Tools\Calendar\Day::createFromFormat("dmy", $this->getExchange()->getDate())->setTime(0, 0, 0, 0);
+		$time = \Katu\Tools\Calendar\Day::createFromFormat("dmy", $this->getExchange()->getDate()) ?: null;
+		if ($time) {
+			$time->setTime(0, 0, 0, 0);
+		}
+
+		return $time;
 	}
 
 	public function getDebtorAccount(): Account
@@ -87,9 +92,14 @@ class Transaction
 		return trim($this->getExchange()->getDebtorName());
 	}
 
-	public function getQuantity(): Quantity
+	public function getCreditorAccount(): Account
 	{
-		return new Quantity(
+		return new Account($this->getFlavor()->getDecodedAccountId($this->getExchange()->getCreditorAccountId()));
+	}
+
+	public function getAmount(): Amount
+	{
+		return new Amount(
 			$this->getExchange()->getAmount() * .01 * $this->getExchange()->getAccountingMultiplier(),
 			CurrencyCollection::createDefault()->getById($this->getFlavor()->getDecodedCurrencyId($this->getExchange()->getCurrencyId()))
 		);
@@ -98,6 +108,11 @@ class Transaction
 	public function getVariableSymbol(): string
 	{
 		return $this->getExchange()->getVariableSymbol();
+	}
+
+	public function getFormattedVariableSymbol(): ?string
+	{
+		return (int)$this->getVariableSymbol() ?: null;
 	}
 
 	public function getConstantSymbol(): string
