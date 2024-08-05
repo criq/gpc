@@ -86,8 +86,7 @@ class Transaction
 	public function getDate(): ?Time
 	{
 		if ($this->getExchange()->getDate()) {
-			$time = Time::createFromFormat("dmy", $this->getExchange()->getDate());
-			$time->setTime(0, 0, 0, 0);
+			$time = Time::createFromDateTime(Time::createFromFormat("dmy", $this->getExchange()->getDate()))->setTime(0, 0, 0, 0);
 		}
 
 		return ($time ?? null);
