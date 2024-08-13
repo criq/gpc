@@ -9,7 +9,7 @@
 	},
 	"require": {
 		"criq/katu": "^4",
-		"criq/pankki": "dev-main",
+		"criq/pankki": "@stable",
 		"globalcitizen/php-iban": "@stable"
 	}
 }
